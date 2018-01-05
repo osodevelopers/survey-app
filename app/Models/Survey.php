@@ -43,15 +43,24 @@ class Survey extends Model
     ];
 
     //A survey has zero or many questions
-    public function question()
+    public function questions()
     {
-        return $this->hasMany('App\Question', 'id');
+        return $this->hasMany('App\Models\Question');
     }
 
     //A survey belongs to one user
     public function user()
     {
         return $this->belongsTo('App\User', 'creator_id');
+    }
+
+    /**
+     * Relation with Answers
+     * @return Eloquent
+     */
+    public function answers()
+    {
+        return $this->hasMany('App\Models\Answer');
     }
 
 

@@ -20,6 +20,6 @@ class Option extends Model
     //An Option has one question
     public function question()
     {
-        return $this->belongsTo('App\Question', 'question_id');
+        return $this->belongsTo('App\Models\Question', 'question_id');
     }
 }
