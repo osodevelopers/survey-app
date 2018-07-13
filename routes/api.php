@@ -16,6 +16,9 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::middleware('auth:api')->get('/user-role', function (Request $request) {
+    return $request->user()->getRoles();
+});
 Route::group(['middleware'=>['auth:api']], function(){
 	Route::post('survey/take','SurveyController@take');
 	Route::get('survey/list','SurveyController@list');

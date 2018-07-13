@@ -30,7 +30,7 @@
 		            	<el-menu-item index="1-1">Surveys
 		            	</el-menu-item>
 	            	</router-link>
-		            <router-link to="/dashboard/create-survey" exact>
+		            <router-link to="/dashboard/create-survey" exact v-if="role == 'admin'">
 			            <el-menu-item index="1-1">Create Survey</el-menu-item>
 		            </router-link>
 		            <!-- <el-menu-item index="1-2"><router-link to="/bar">Go to Bar</router-link></el-menu-item> -->
@@ -116,20 +116,28 @@
   export default {
   	mounted() {
 	      	this.name = this.$store.state.user.data.name;
+	      	// this.role = this.$store.getters.getRole;
 	  },
     data() {
       return {
-        name : 'Tom'
+        name : 'Tom',
       }
+    },
+    computed: {
+    	role() {
+    		return this.$store.getters.getRole;
+    	}
     },
     methods: {
 	    logoutF() {
     		console.log('LogOUT!!!!!!!!!!!!!!');
     		this.$store.commit('SET_USER', null);
     		this.$store.commit('SET_TOKEN', null);
+    		this.$store.commit('SET_ROLE', null);
     		if (window.localStorage) {
+    		  window.localStorage.setItem('role', null);
     		  window.localStorage.setItem('user', null);
-    		  window.localStorage.setItem('token', null)
+    		  window.localStorage.setItem('token', null);
     		}
     		this.$router.push('/login');
     	},
